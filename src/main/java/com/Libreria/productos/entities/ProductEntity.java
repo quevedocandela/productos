@@ -1,8 +1,7 @@
 package com.Libreria.productos.entities;
-
+import java.util.Objects;
 import jakarta.persistence.*;
 
-import javax.annotation.processing.Generated;
 
 @Entity
 @Table(name = "productos")
@@ -98,4 +97,4 @@ public class ProductEntity {
 
 
 
-}
+
