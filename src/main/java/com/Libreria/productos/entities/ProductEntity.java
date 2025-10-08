@@ -47,12 +47,12 @@ public class ProductEntity {
         this.nombreProducto = nombreProducto;
     }
 
-    public String getDescripcion() {
+    public String getDescripcionProducto() {
         return descripcionProducto;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcionProducto = descripcion;
+    public void setDescripcionProducto(String descripcionProducto) {
+        this.descripcionProducto = descripcionProducto;
     }
 
     public double getPrecioProducto() {
