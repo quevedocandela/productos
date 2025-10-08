@@ -14,13 +14,22 @@ public class ProductEntity {
     private String nombreProducto;
 
     @Column(nullable = false)
-    private String descripcion;
+    private String descripcionProducto;
 
     @Column(nullable = false)
     private double precioProducto;
 
     @Column(nullable = false)
     private int cantidadProducto;
+
+    @Column(nullable = false)
+    private String proveedor;
+
+    @Column(nullable = false)
+    private String rubro;
+
+    @Column(nullable = false)
+    private String categoria;
 
     public Integer getId() {
       return id;
@@ -39,11 +48,11 @@ public class ProductEntity {
     }
 
     public String getDescripcion() {
-        return descripcion;
+        return descripcionProducto;
     }
 
     public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+        this.descripcionProducto = descripcion;
     }
 
     public double getPrecioProducto() {
@@ -62,6 +71,30 @@ public class ProductEntity {
         this.cantidadProducto = cantidadProducto;
     }
 
+    public String getProveedor() {
+        return proveedor;
+    }
+
+    public void setProveedor(String proveedor) {
+        this.proveedor = proveedor;
+    }
+
+    public String getRubro() {
+        return rubro;
+    }
+
+    public void setRubro(String rubro) {
+        this.rubro = rubro;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
@@ -70,12 +103,15 @@ public class ProductEntity {
                 && cantidadProducto == product.cantidadProducto
                 && Objects.equals(id, product.id)
                 && Objects.equals(nombreProducto, product.nombreProducto)
-                && Objects.equals(descripcion, product.descripcion);
+                && Objects.equals(descripcionProducto, product.descripcionProducto)
+                && Objects.equals(proveedor, product.proveedor)
+                && Objects.equals(rubro, product.rubro)
+                && Objects.equals(categoria, product.categoria);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nombreProducto, descripcion, precioProducto, cantidadProducto);
+        return Objects.hash(id, nombreProducto, descripcionProducto, precioProducto, cantidadProducto);
     }
 
     @Override
@@ -83,9 +119,12 @@ public class ProductEntity {
         final StringBuilder sb = new StringBuilder("Product: \n");
         sb.append("id: ").append(id).append('\n');
         sb.append("nombreProducto: ").append(nombreProducto).append('\n');
-        sb.append("descripcion: ").append(descripcion).append('\n');
+        sb.append("descripcionProducto: ").append(descripcionProducto).append('\n');
         sb.append("precioProducto: ").append(precioProducto).append('\n');
         sb.append("cantidadProducto: ").append(cantidadProducto).append('\n');
+        sb.append("proveedor: ").append(proveedor).append('\n');
+        sb.append("rubro: ").append(rubro).append('\n');
+        sb.append("categoria: ").append(categoria).append('\n');
         return sb.toString();
     }
 }
