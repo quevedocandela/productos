@@ -1,12 +1,10 @@
 package com.Libreria.productos.services;
 
-//Logica del negocio + converciones
-
 import com.Libreria.productos.dtos.ProductDto;
 import com.Libreria.productos.entities.ProductEntity;
 import com.Libreria.productos.repositories.ProductRepository;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,13 +18,13 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    // La C es de Create
+    // The C (create) in CRUD
     public ProductEntity createProductEntity(ProductDto productDto) {
-        ProductEntity productEntity = getProductEntity(productDto);
+        ProductEntity productEntity = getProduct(productDto);
         return productRepository.save(productEntity);
     }
 
-    private static ProductEntity getProductEntity(ProductDto productDto) {
+    private static ProductEntity getProduct(ProductDto productDto) {
         ProductEntity productEntity = new ProductEntity();
 
         productEntity.setNombreProducto(productDto.getNombreProducto());
@@ -40,47 +38,64 @@ public class ProductService {
         return productEntity;
     }
 
-    // La R es para leer READ
-
+    // The R (read) in CRUD
+    @Transactional(readOnly = true)
     public List<ProductDto> getAllProductEntity(){
         return productRepository.findAll()
-                .stream() //transforma una lista en un flujo y permite hacer cosas de un item a la vez
-                .map(this::toResponse) // mapea cada uno de los productos con el metodo Response
-                .toList(); // lo transforma en una lista
+                .stream()
+                .map(this::toResponse)
+                .toList();
     }
 
+    @Transactional(readOnly = true)
     public Optional<ProductDto> getProductResponseById(Integer id){
-        return productRepository.findById(id).map(this::toResponse); //lo que hace este metodo es encontrar por ID lo de la lista
+        return productRepository.findById(id).map(this::toResponse);
     }
 
-    private ProductDto toResponse(ProductEntity p ){
+    private ProductDto toResponse(ProductEntity p){
         return new ProductDto(
-          p.getId(),
-          p.getNombreProducto(),
-          p.getDescripcionProducto(),
-          p.getPrecioProducto(),
-          p.getCantidadProducto(),
-          p.getProveedor(),
-          p.getRubro(),
-          p.getCategoria()
+                p.getId(),
+                p.getNombreProducto(),
+                p.getDescripcionProducto(),
+                p.getPrecioProducto(),
+                p.getCantidadProducto(),
+                p.getProveedor(),
+                p.getRubro(),
+                p.getCategoria()
         );
     }
 
-    //La U es para actualizar UPDATE
+    // The U (update) in CRUD
+    @Transactional
+    public ProductEntity update(ProductDto productDto){
+        if (productDto.getId() == null) {
+            throw new IllegalArgumentException("El ID del producto no puede ser nulo");
+        }
 
-    ProductEntity.setNombreProducto(ProductDto.getNombreProducto());
-    ProductEntity.setDescripcionProducto(ProductDto.getDescripcionProducto());
-    ProductEntity.setPrecioProducto(ProductDto.getPrecioProducto());
-    ProductEntity.setCantidadProducto(ProductDto.getCaantidadProducto());
-    ProductEntity.setProveedor(ProductDto.getProveedor());
-    ProductEntity.setRubro(ProductDto.getRubro());
-    ProductEntity.setCategoria(ProductDto.getCategoria());
+        ProductEntity productEntity = productRepository.findById(productDto.getId())
+                .orElseThrow(() -> new EntityNotFoundException("Producto no encontrado con ID: " + productDto.getId()));
 
-    return productRepository.save(ProductEntity);
+        productEntity.setNombreProducto(productDto.getNombreProducto());
+        productEntity.setDescripcionProducto(productDto.getDescripcionProducto());
+        productEntity.setPrecioProducto(productDto.getPrecioProducto());
+        productEntity.setCantidadProducto(productDto.getCantidadProducto());
+        productEntity.setProveedor(productDto.getProveedor());
+        productEntity.setRubro(productDto.getRubro());
+        productEntity.setCategoria(productDto.getCategoria());
 
+        return productRepository.save(productEntity);
+    }
 
-    //La D es para borrar DELETE
+    // The D (delete) in CRUD
     public void deleteProductEntity(Integer id){
+        if (id == null) {
+            throw new IllegalArgumentException("El ID del producto no puede ser nulo");
+        }
+
+        if(!productRepository.existsById(id)){
+            throw new EntityNotFoundException("Producto no encontrado con ID: " + id);
+        }
+
         productRepository.deleteById(id);
     }
 }
