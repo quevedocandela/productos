@@ -111,7 +111,7 @@ public class ProductEntity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nombreProducto, descripcionProducto, precioProducto, cantidadProducto);
+        return Objects.hash(id, nombreProducto, descripcionProducto, precioProducto, cantidadProducto, proveedor, rubro, categoria);
     }
 
     @Override
