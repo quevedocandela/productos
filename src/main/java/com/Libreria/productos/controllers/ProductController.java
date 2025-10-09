@@ -3,10 +3,11 @@ package com.Libreria.productos.controllers;
 //Maneja la interaccion con el usuario
 
 import com.Libreria.productos.dtos.ProductDto;
+import com.Libreria.productos.dtos.ProductResponseDto;
 import com.Libreria.productos.entities.ProductEntity;
 import com.Libreria.productos.services.ProductService;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,35 +22,38 @@ public class ProductController {
         this.productService = productService;
     }
 
-    //Created
-    @PostMapping("/create")
-    public ResponseEntity<?> createProduct(@RequestBody ProductDto productDto){
-        ProductEntity created = productService.createProductEntity(productDto);
+    // La C par crear
+    @PostMapping("/crear")
+    public ResponseEntity<?> createProduct(@RequestBody ProductDto productDto) {
+        ProductEntity created = productService.createProduct(productDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
 
-    //read
+    // La R es parA Leer
     @GetMapping
-    public List<ProductDto> getAllProductEntity(){
-        return productService.getAllProductEntity();
+    public List<ProductResponseDto> getAllProducts(){
+        return productService.getAllProducts();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProductDto> getProductById(@PathVariable Integer id){
+    public ResponseEntity<ProductResponseDto> getProductById(@PathVariable Integer id) {
         return productService.getProductResponseById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PatchMapping("/update")
-    public ResponseEntity<?> updateProductEntity(@RequestBody ProductDto productDto){
-        ProductEntity update = productService.update(productDto);
-        return ResponseEntity.ok(update);
+    //La U es para actualizar
+    @PatchMapping("/actualizar")
+    public ResponseEntity<?> updateProduct(@RequestBody ProductDto product) {
+        ProductEntity updated = productService.updateProduct(product);
+        return ResponseEntity.status(HttpStatus.CREATED).body(updated);
     }
 
-    @DeleteMapping("/delete/{id}")  // <- Aquí estaba el error
-    public ResponseEntity<Void> deleteProductEntity(@PathVariable Integer id){
-        productService.deleteProductEntity(id);
+    // La D es para borrar
+    @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity<Void> deleteProduct(@PathVariable Integer id){
+        productService.deleteProduct(id);
         return ResponseEntity.noContent().build();
     }
+
 }
