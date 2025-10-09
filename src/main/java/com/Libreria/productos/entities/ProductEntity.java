@@ -1,63 +1,139 @@
 package com.Libreria.productos.entities;
-//representa a las tablas de la base de datos
+
+//La clase entities representa la tabla en la BD
+
+import jakarta.persistence.*;
+import jakarta.persistence.criteria.CriteriaBuilder;
+
+import java.util.Objects;
+
+@Entity
+@Table(name = "productos")
 public class ProductEntity {
-    private long id_producto;
-    private String nombre_producto;
-    private String descripcion_producto;
-    private double precio_producto;
-    private int cantidad_producto;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-    //constructor vacio
-    public ProductEntity(){}
+    @Column(name = "nombreProducto", nullable = false)
+    private String nombreProducto;
 
-    //constructor completo
-    public ProductEntity(long Id_producto, String nombre_producto, String descripcion_producto, double precio_producto,int cantidad_producto){
-        this.id_producto = id_producto;
-        this.nombre_producto = nombre_producto;
-        this.descripcion_producto = descripcion_producto;
-        this.precio_producto = precio_producto;
-        this.cantidad_producto = cantidad_producto;
+    @Column(name = "descripcionProducto", nullable = false)
+    private String descripcionProducto;
+
+    @Column(name = "precioProducto", nullable = false)
+    private Float precioProducto;
+
+    @Column(name = "cantidadProducto", nullable = false)
+    private Integer cantidadProducto;
+
+    @Column(name = "proveedor", nullable = false)
+    private String proveedor;
+
+    @Column(name = "rubro", nullable = false)
+    private String rubro;
+
+    @Column(name = "categoria", nullable = false)
+    private String categoria;
+
+    //Getters y Setters
+
+    public Integer getId(){
+        return id;
+    }
+    public void setId(Integer id){
+        this.id = id;
     }
 
-    //getters
-    public long getId_producto() {
-        return id_producto;
+    public String getNombreProducto(){
+        return nombreProducto;
     }
 
-    public String getNombre_producto(){
-        return nombre_producto;
+    public void setNombreProducto(String nombreProducto) {
+        this.nombreProducto = nombreProducto;
+    }
+    public String getDescripcionProducto(){
+        return descripcionProducto;
     }
 
-    public String getDescripcion_producto(){
-        return descripcion_producto;
+    public void setDescripcionProducto(String descripcionProducto) {
+        this.descripcionProducto = descripcionProducto;
     }
 
-    public double getPrecio_producto(){
-        return precio_producto;
+    public Float getPrecioProducto(){
+        return precioProducto;
     }
 
-    public int getCantidad_producto(){
-        return cantidad_producto;
+    public void setPrecioProducto(Float precioProducto) {
+        this.precioProducto = precioProducto;
     }
 
-    //setters
-    public void setId_producto(long id_producto){
-        this.id_producto = id_producto;
+    public Integer getCantidadProducto(){
+        return cantidadProducto;
     }
 
-    public void setNombre_producto(String nombre_producto){
-        this.nombre_producto = nombre_producto;
+    public void setCantidadProducto(Integer cantidadProducto) {
+        this.cantidadProducto = cantidadProducto;
     }
 
-    public void setDescripcion_producto(String descripcion_producto){
-        this.descripcion_producto = descripcion_producto;
+    public String getProveedor(){
+        return proveedor;
     }
 
-    public void setPrecio_producto(double precio_producto){
-        this.precio_producto = precio_producto;
+    public void setProveedor(String proveedor) {
+        this.proveedor = proveedor;
     }
 
-    public void setCantidad_producto(int cantidad_producto){
-        this.cantidad_producto = cantidad_producto;
+    public String getRubro(){
+        return rubro;
     }
+
+    public void setRubro(String rubro) {
+        this.rubro = rubro;
+    }
+
+    public String getCategoria(){
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        ProductEntity productEntity = (ProductEntity) o;
+        return Objects.equals(id, productEntity.id) &&
+                Objects.equals(nombreProducto, productEntity.nombreProducto) &&
+                Objects.equals(descripcionProducto, productEntity.descripcionProducto) &&
+                Objects.equals(precioProducto, productEntity.precioProducto) &&
+                Objects.equals(cantidadProducto, productEntity.cantidadProducto) &&
+                Objects.equals(proveedor, productEntity.proveedor) &&
+                Objects.equals(rubro, productEntity.rubro) &&
+                Objects.equals(categoria, productEntity.categoria);
+    }
+
+    @Override
+    public int hashCode(){
+        return Objects.hash(id, nombreProducto, descripcionProducto, precioProducto,
+                cantidadProducto, proveedor, rubro, categoria);
+    }
+
+    @Override
+    public String toString(){
+        final StringBuilder sb = new StringBuilder("ProductEntity: \n");
+        sb.append("id: ").append(id).append('\n');
+        sb.append("nombreProducto: ").append(nombreProducto).append('\n');
+        sb.append("descripcionProducto: ").append(descripcionProducto).append('\n');
+        sb.append("precioProducto: ").append(precioProducto).append('\n');
+        sb.append("cantidadProducto: ").append(cantidadProducto).append('\n');
+        sb.append("proveedor: ").append(proveedor).append('\n');
+        sb.append("rubro: ").append(rubro).append('\n');
+        sb.append("categoria: ").append(categoria).append('\n');
+        return sb.toString();
+    }
+
+
+
+
 }

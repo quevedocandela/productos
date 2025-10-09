@@ -1,0 +1,91 @@
+package com.Libreria.productos.dtos;
+
+import jakarta.persistence.criteria.CriteriaBuilder;
+
+public class ProductResponseDto {
+    private Integer id;
+    private String nombreProducto;
+    private String descripcionProducto;
+    private Float precioProducto;
+    private Integer cantidadProducto;
+    private String proveedor;
+    private String rubro;
+    private String categoria;
+
+    public ProductResponseDto(Integer id,
+                              String nombreProducto,
+                              String descripcionProducto,
+                              Float precioProducto,
+                              Integer cantidadProducto,
+                              String proveedor,
+                              String rubro,
+                              String categoria){
+        this.id = id;
+        this.nombreProducto = nombreProducto;
+        this.descripcionProducto = descripcionProducto;
+        this.precioProducto = precioProducto;
+        this.cantidadProducto = cantidadProducto;
+        this.proveedor = proveedor;
+        this.rubro = rubro;
+        this.categoria = categoria;
+    }
+
+    //Getters y Setters
+
+    public Integer getId(){
+        return id;
+    }
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getNombreProducto(){
+        return nombreProducto;
+    }
+    public void setNombreProducto(String nombreProducto){
+        this.nombreProducto = nombreProducto;
+    }
+
+    public String getDescripcionProducto(){
+        return descripcionProducto;
+    }
+    public void setDescripcionProducto(String descripcionProducto) {
+        this.descripcionProducto = descripcionProducto;
+    }
+
+    public Float getPrecioProducto(){
+        return precioProducto;
+    }
+    public void setPrecioProducto(Float precioProducto){
+        this.precioProducto = precioProducto;
+    }
+
+    public Integer getCantidadProducto(){
+        return cantidadProducto;
+    }
+    public void setCantidadProducto(Integer cantidadProducto) {
+        this.cantidadProducto = cantidadProducto;
+    }
+
+    public String getProveedor(){
+        return proveedor;
+    }
+    public void setProveedor(String proveedor) {
+        this.proveedor = proveedor;
+    }
+
+    public String getRubro(){
+        return rubro;
+    }
+    public void setRubro(String rubro) {
+        this.rubro = rubro;
+    }
+
+    public String getCategoria(){
+        return categoria;
+    }
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+}
