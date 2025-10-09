@@ -4,87 +4,74 @@ public class ProductDto {
     private Integer id;
     private String nombreProducto;
     private String descripcionProducto;
-    private Double precioProducto;
+    private Float precioProducto;
     private Integer cantidadProducto;
     private String proveedor;
     private String rubro;
     private String categoria;
 
-    public ProductDto(){
-    }
-
-    public ProductDto(Integer id, String nombreProducto, String descripcionProducto, Double precioProducto, Integer cantidadProducto, String proveedor, String rubro, String categoria){
-        this.id = id;
-        this.nombreProducto = nombreProducto;
-        this.descripcionProducto = descripcionProducto;
-        this.precioProducto = precioProducto;
-        this.cantidadProducto = cantidadProducto;
-        this.proveedor = proveedor;
-        this.rubro = rubro;
-        this.categoria = categoria;
-    }
-
-    public Integer getId(){
+    // Getters y Setters
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id){
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getNombreProducto(){
+    public String getNombreProducto() {
         return nombreProducto;
     }
 
-    public void setNombreProducto(String nombreProducto){
+    public void setNombreProducto(String nombreProducto) {
         this.nombreProducto = nombreProducto;
     }
 
-    public String getDescripcionProducto(){
+    public String getDescripcionProducto() {
         return descripcionProducto;
     }
 
-    public void setDescripcionProducto(String descripcionProducto){
+    public void setDescripcionProducto(String descripcionProducto) {
         this.descripcionProducto = descripcionProducto;
     }
 
-    public Double getPrecioProducto(){
+    public Float getPrecioProducto() {
         return precioProducto;
     }
 
-    public void setPrecioProducto(Double precioProducto){
+    public void setPrecioProducto(Float precioProducto) {
         this.precioProducto = precioProducto;
     }
 
-    public Integer getCantidadProducto(){
+    public Integer getCantidadProducto() {
         return cantidadProducto;
     }
 
-    public void setCantidadProducto(Integer cantidadProducto){
+    public void setCantidadProducto(Integer cantidadProducto) {
         this.cantidadProducto = cantidadProducto;
     }
 
-    public String getProveedor(){
+    public String getProveedor() {
         return proveedor;
     }
 
-    public void setProveedor(String proveedor){
+    public void setProveedor(String proveedor) {
         this.proveedor = proveedor;
     }
 
-    public String getRubro(){
+    public String getRubro() {
         return rubro;
     }
 
-    public void setRubro(String rubro){
+    public void setRubro(String rubro) {
         this.rubro = rubro;
     }
 
-    public String getCategoria(){
+    public String getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(String categoria){
+    public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
 }
